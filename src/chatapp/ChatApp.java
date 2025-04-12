@@ -30,7 +30,7 @@ public class ChatApp {
         }
         return hasUnderScore && fiveCharactersPlus;
     }
-    
+    //Password validation method
     public static boolean checkPasswordComplexity(String password){
         boolean hasLetter = false;
         boolean hasDigit = false;
@@ -73,7 +73,7 @@ public class ChatApp {
         
         System.out.println("Login successful");
         logedIn = true;
-        
+    
         return logedIn;
     }
     
@@ -89,7 +89,7 @@ public class ChatApp {
     }
     
     public static void registerUser(){
-        
+        System.out.println("Hello");
    
         Console input = System.console();
         String userName = input.readLine("Enter Username: ");
