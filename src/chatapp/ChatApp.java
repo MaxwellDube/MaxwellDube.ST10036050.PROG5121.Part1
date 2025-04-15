@@ -53,11 +53,10 @@ public class ChatApp {
             }
                     
         }
-        
         return hasLetter && hasDigit && hasSymbole && eightCharactersPlus;
-
-
     }
+    
+    
     //Login screen method
     public static boolean loginUser(String userName, String password) {
     boolean loggedIn = false;
@@ -84,17 +83,29 @@ public class ChatApp {
     
 }
     
-//    public static boolean checkCellPhoneNumber(){
-//        
-//    }
+    public static boolean checkCellPhoneNumber(String phoneNumber){
+        boolean allAreDigits = true;
+        boolean hasTenDigits = false;
+        
+         if (phoneNumber.startsWith("+")){
+             for(char dig: phoneNumber.toCharArray()){
+                 if(!Character.isDigit(dig)){
+                    allAreDigits = false;
+                 }else if(phoneNumber.length() < 14 || phoneNumber.length() > 9){
+                    hasTenDigits = true;
+                 }
+             }
+         }
+         return allAreDigits && hasTenDigits;
+    }
     
     public static void dashboard(String userName){
         System.out.println("Hey " + userName + "!, welcome to you Chatapp dashboard");
     }
+    
+    
     public static void main(String[] args) {
-        
-        registerUser();
-        
+        registerUser();   
     }
     
     // REGISTER USER METHOD
@@ -122,6 +133,18 @@ public class ChatApp {
                 break;
             } else {
                 System.out.println("Password should be more than 8 characters and contain a capital letter, number, and symbol.");
+            }
+        }
+        String phoneNumber; 
+        // Keep prompting until password is valid
+        while (true) {
+            phoneNumber = input.readLine("Enter Phone number: ");
+            if (checkCellPhoneNumber(phoneNumber)) {
+                System.out.println("Password successfully captured");
+                break;
+            } else {
+                System.out.println("Missing country code. Please include your country code (e.g. +27).");
+                System.out.println("Invalid format: country code should be followed by digits only.");
             }
         }
 
