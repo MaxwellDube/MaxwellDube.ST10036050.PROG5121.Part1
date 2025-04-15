@@ -15,10 +15,13 @@ public class ChatApp {
     /**
      * @param args the command line arguments
      */
+    
+    //Username validation method
     public static boolean checkUserName(String userName){
         boolean hasUnderScore = false;
         boolean fiveCharactersPlus = false;
         
+        //Checking if the username meets all the complexity requirements
         for (char ch: userName.toCharArray()){
             if(ch == '_'){
                 hasUnderScore = true;
@@ -37,6 +40,7 @@ public class ChatApp {
         boolean hasSymbole = false;
         boolean eightCharactersPlus = false;
         
+        //Checking if the password meets all the complexity requirements
         for(char c: password.toCharArray()){
             if (Character.isUpperCase(c)){
                 hasLetter = true;
@@ -54,7 +58,7 @@ public class ChatApp {
 
 
     }
-    
+    //Login screen method
     public static boolean loginUser(String userName, String password) {
     boolean loggedIn = false;
 
@@ -79,16 +83,13 @@ public class ChatApp {
     return loggedIn;
     
 }
-
-    
-    
     
 //    public static boolean checkCellPhoneNumber(){
 //        
 //    }
     
     public static void dashboard(String userName){
-        System.out.print("Hey " + userName + "!, welcome to you Chatapp dashboard");
+        System.out.println("Hey " + userName + "!, welcome to you Chatapp dashboard");
     }
     public static void main(String[] args) {
         
@@ -96,31 +97,35 @@ public class ChatApp {
         
     }
     
-   // REGISTER USER method updated:
+    // REGISTER USER METHOD
     public static void registerUser() {
         Console input = System.console();
 
-        System.out.println("Hello");
-
-        String userName = input.readLine("Enter Username: ");
-
-        if (!checkUserName(userName)) {
-            System.out.println("Username should contain an underscore and be more than 5 characters long.");
-            return; // Exit if username is invalid
+        String userName;
+        // Keep prompting until username is valid
+        while (true) {
+            userName = input.readLine("Enter Username: ");
+            if (checkUserName(userName)) {
+                System.out.println("Username successfully captured");
+                break;
+            } else {
+                System.out.println("Username should contain an underscore and be more than 5 characters long.");
+            }
         }
 
-        System.out.println("Username successfully captured");
-
-        String password = input.readLine("Enter Password: ");
-
-        if (!checkPasswordComplexity(password)) {
-            System.out.println("Password should be more than 8 characters, and contain a capital letter, number, and symbol.");
-            return; // Exit if password is invalid
+        String password;
+        // Keep prompting until password is valid
+        while (true) {
+            password = input.readLine("Enter Password: ");
+            if (checkPasswordComplexity(password)) {
+                System.out.println("Password successfully captured");
+                break;
+            } else {
+                System.out.println("Password should be more than 8 characters and contain a capital letter, number, and symbol.");
+            }
         }
 
-        System.out.println("Password successfully captured");
-
-        // Proceed to login
+        // Call login screen
         loginUser(userName, password);
     }
     
