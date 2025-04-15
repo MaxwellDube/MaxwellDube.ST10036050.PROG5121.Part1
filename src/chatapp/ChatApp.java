@@ -55,58 +55,73 @@ public class ChatApp {
 
     }
     
-    public static boolean loginUser(String userName, String password){
-        boolean logedIn = false;
-        
-        System.out.println("ACCOUNT SUCCESSFULLY CREATED");
-        System.out.println("Use your credentials to login");
+    public static boolean loginUser(String userName, String password) {
+    boolean loggedIn = false;
 
-        Console input = System.console();
-        String loginUserName = input.readLine("Enter Username: ");
-        String loginPassword = input.readLine("Enter Password: ");
-        
-        while (!loginUserName.equals(userName) || !loginPassword.equals(password) ){
-            System.out.println("Incorrrect Username or Password");
-            loginUserName = input.readLine("Enter Username: ");
-            loginPassword = input.readLine("Enter Password: ");
-        }
-        
-        System.out.println("Login successful");
-        logedIn = true;
-    
-        return logedIn;
+    System.out.println("ACCOUNT SUCCESSFULLY CREATED");
+    System.out.println("Use your credentials to login");
+
+    Console input = System.console();
+
+    String loginUserName = input.readLine("Enter Username: ");
+    String loginPassword = input.readLine("Enter Password: ");
+
+    while (!loginUserName.equals(userName) || !loginPassword.equals(password)) {
+        System.out.println("Incorrect Username or Password");
+        loginUserName = input.readLine("Enter Username: ");
+        loginPassword = input.readLine("Enter Password: ");
     }
+
+    System.out.println("Login successful");
+    loggedIn = true;
+    dashboard(userName);
+
+    return loggedIn;
+    
+}
+
     
     
     
 //    public static boolean checkCellPhoneNumber(){
 //        
 //    }
+    
+    public static void dashboard(String userName){
+        System.out.print("Hey " + userName + "!, welcome to you Chatapp dashboard");
+    }
     public static void main(String[] args) {
         
         registerUser();
         
     }
     
-    public static void registerUser(){
-        System.out.println("Hello");
-   
+   // REGISTER USER method updated:
+    public static void registerUser() {
         Console input = System.console();
+
+        System.out.println("Hello");
+
         String userName = input.readLine("Enter Username: ");
 
-        while (checkUserName(userName)){
-            System.out.println("Username successfully captured");
-            String password = input.readLine("Enter Password: ");
-            while (checkPasswordComplexity(password)){
-                System.out.println("Password successfully captured");
-                loginUser(userName, password);
-            }
-            System.out.println("Password should contain more than 8 char, a symbole, number and capital letter");
-
+        if (!checkUserName(userName)) {
+            System.out.println("Username should contain an underscore and be more than 5 characters long.");
+            return; // Exit if username is invalid
         }
-        System.out.println("Username should contain an underscore and more than 5 characters long");
-        registerUser();
-        
+
+        System.out.println("Username successfully captured");
+
+        String password = input.readLine("Enter Password: ");
+
+        if (!checkPasswordComplexity(password)) {
+            System.out.println("Password should be more than 8 characters, and contain a capital letter, number, and symbol.");
+            return; // Exit if password is invalid
+        }
+
+        System.out.println("Password successfully captured");
+
+        // Proceed to login
+        loginUser(userName, password);
     }
     
 }
